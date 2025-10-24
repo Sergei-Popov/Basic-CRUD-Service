@@ -3,13 +3,18 @@ import express from 'express';
 import userRoutes from './routes/users.js';
 
 
+const PORT = process.env.PORT || 3000
 const app = express()
-const port = process.env.PORT || 3000
 
 app.use(express.json());
 
 app.use('/users', userRoutes);
 
-app.listen(port, () => {
-	console.log(`Server running on port: http://localhost:${port}`)
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).send('Something broke!');
+});
+
+app.listen(PORT, () => {
+	console.log(`Server running on port: http://localhost:${PORT}`)
 })

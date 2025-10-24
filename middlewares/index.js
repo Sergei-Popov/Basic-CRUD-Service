@@ -1,2 +1,2 @@
-export { validateBody } from './validateBody.js';
-export { validateParams } from './validateParams.js';
+export { validateCreateUser, validateUpdateUser } from './validateBody.js';
+export { validateUserId } from './validateParams.js';

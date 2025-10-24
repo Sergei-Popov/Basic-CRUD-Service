@@ -1,11 +1,24 @@
-import { users } from "../routes/users.js";
+import { param, validationResult } from 'express-validator';
+import { users } from "../data/db.js";
 
-export const validateParams = (req, res, next) => {
-	const { id } = req.params;
+const handleValidationErrors = (req, res, next) => {
+	const errors = validationResult(req);
 
-	const user = users.find((user) => user.id === id)
-
-	if (!user) return res.status(404).send('User not found');
-
+	if (!errors.isEmpty()) {
+		return res.status(404).json({ errors: errors.array() });
+	}
 	next();
 };
+
+export const validateUserId = [
+	param('id').custom((id, { req }) => {
+		const user = users.find((user) => user.id === id);
+		if (!user) {
+			throw new Error('User not found');
+		}
+
+		req.user = user;
+		return true;
+	}),
+	handleValidationErrors,
+];
