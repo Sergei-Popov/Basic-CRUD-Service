@@ -11,5 +11,5 @@ app.use(express.json());
 app.use('/users', userRoutes);
 
 app.listen(PORT, () => {
-	console.log(`Server running on port: http://localhost:${PORT}`)
+	console.log(`Сервер запущен: http://localhost:${PORT}`)
 })
