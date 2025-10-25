@@ -17,7 +17,7 @@ pool.query('CREATE TABLE IF NOT EXISTS users (id UUID PRIMARY KEY, first_name VA
 	if(err) {
 		console.error('Error creating the users table', err.stack);
 	} else {
-		console.log('Users table created:', res.rows);
+		console.log('USERS table created');
 	}
 });
 
