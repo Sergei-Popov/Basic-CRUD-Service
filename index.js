@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 
 pool.query(
   'CREATE TABLE IF NOT EXISTS users (id UUID PRIMARY KEY, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL)',
-  (err, result) => {
+  (err) => {
     if (err) {
       console.error('Error creating the users table', err.stack);
     } else {
@@ -27,11 +27,6 @@ pool.query(
 app.use(express.json());
 
 app.use('/users', userRoutes);
-
-app.use((err, req, res, next) => {
-  logger.error(err.message);
-  res.status(500).send('Something broke!');
-});
 
 app.listen(PORT, () => {
   console.log(`Сервер запущен: http://localhost:${PORT}`);
